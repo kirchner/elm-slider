@@ -55,6 +55,35 @@ sliderConfig =
     , max = 80
     , step = 10
     , lift = SliderMsg
+    , attrs =
+        { left =
+            [ style
+                [ ( "background-color", "green" )
+                , ( "height", "2px" )
+                ]
+            ]
+        , right =
+            [ style
+                [ ( "background-color", "red" )
+                , ( "height", "2px" )
+                ]
+            ]
+        , nob =
+            [ style
+                [ ( "border-radius", "50%" )
+                , ( "background-color", "green" )
+                , ( "width", "16px" )
+                , ( "height", "16px" )
+                ]
+            ]
+        , nobPressed =
+            [ style
+                [ ( "background-color", "blue" ) ]
+            ]
+        }
+    , label =
+        \value ->
+            div [] [ text (toString value) ]
     }
 
 
@@ -65,4 +94,6 @@ subscriptions model =
 
 view : Model -> Html Msg
 view model =
-    Slider.view sliderConfig model.slider
+    div
+        [ style [ ( "width", "800px" ) ] ]
+        [ Slider.view sliderConfig model.slider ]
