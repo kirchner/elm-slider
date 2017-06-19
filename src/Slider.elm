@@ -83,9 +83,9 @@ update config msg (State state) =
                 { state
                     | position = newPosition
                     , value =
-                        round newPosition
-                            |> (\p -> p - p % config.step)
-                            |> clamp config.min config.max
+                        (newPosition / toFloat config.step)
+                            |> round
+                            |> (\v -> v * config.step)
                 }
                 ! []
 
@@ -96,7 +96,10 @@ update config msg (State state) =
 
         OnDragEnd ->
             State
-                { state | mouseDown = False }
+                { state
+                    | mouseDown = False
+                    , position = toFloat state.value
+                }
                 ! []
 
         OnClick _ ->
