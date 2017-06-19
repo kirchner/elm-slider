@@ -86,6 +86,7 @@ update config msg (State state) =
                         (newPosition / toFloat config.step)
                             |> round
                             |> (\v -> v * config.step)
+                            |> clamp config.min config.max
                 }
                 ! []
 
